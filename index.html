@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>魔法靈藥調配室杜芬舒薇</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game">
+
+        <!-- =========================
+             開始畫面
+        ========================== -->
+        <section id="startScreen" class="screen active">
+
+            <div class="moon">🌙</div>
+
+            <p class="eyebrow">HALLOWEEN MAGIC LAB</p>
+
+            <h1>
+                魔法靈藥<br>
+                <span>調配室</span>
+            </h1>
+ <h2>   </h2>
+            <h2>杜芬舒薇</h2>
+
+            <p class="intro">
+                選擇三種你喜歡的顏色，
+                <br>
+                將它們投入魔法染缸。
+            </p>
+
+            <button id="startBtn" class="magic-btn">
+                🧪 開始調配
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             顏色選擇
+        ========================== -->
+        <section id="colorScreen" class="screen">
+
+            <div class="top-info">
+                <p>MAGIC LAB</p>
+                <span id="selectedCount">0 / 3</span>
+            </div>
+
+            <h2>選擇你的魔法顏色</h2>
+
+            <p class="instruction">
+                選擇 3 種你今天喜歡的顏色
+            </p>
+
+            <div id="colorList" class="color-list">
+
+                <div class="color-tube" draggable="true" data-color="#e63946" data-name="紅" style="--tube-color:#e63946;">
+                    <div class="tube-liquid"></div>
+                    <span>紅</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#f77f00" data-name="橙" style="--tube-color:#f77f00;">
+                    <div class="tube-liquid"></div>
+                    <span>橙</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#fcbf49" data-name="黃" style="--tube-color:#fcbf49;">
+                    <div class="tube-liquid"></div>
+                    <span>黃</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#52b788" data-name="綠" style="--tube-color:#52b788;">
+                    <div class="tube-liquid"></div>
+                    <span>綠</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#4895ef" data-name="藍" style="--tube-color:#4895ef;">
+                    <div class="tube-liquid"></div>
+                    <span>藍</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#8e44ad" data-name="紫" style="--tube-color:#8e44ad;">
+                    <div class="tube-liquid"></div>
+                    <span>紫</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#ff8fab" data-name="粉" style="--tube-color:#ff8fab;">
+                    <div class="tube-liquid"></div>
+                    <span>粉</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#222222" data-name="黑" style="--tube-color:#222222;">
+                    <div class="tube-liquid"></div>
+                    <span>黑</span>
+                </div>
+
+                <div class="color-tube" draggable="true" data-color="#f5f5f5" data-name="白" style="--tube-color:#f5f5f5;">
+                    <div class="tube-liquid"></div>
+                    <span>白</span>
+                </div>
+
+            </div>
+
+
+            <div class="cauldron-area">
+
+                <div id="cauldron" class="cauldron">
+
+                    <div class="smoke smoke-1"></div>
+                    <div class="smoke smoke-2"></div>
+
+                    <div id="mixture" class="mixture"></div>
+
+                </div>
+
+                <p id="dropText">
+                    將魔法藥水拖進染缸
+                </p>
+
+            </div>
+
+            <button id="mixBtn" class="magic-btn disabled">
+                🔮 開始調配
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             調配動畫
+        ========================== -->
+        <section id="mixScreen" class="screen">
+
+            <div class="magic-circle">
+                ✦
+            </div>
+
+            <h2>魔法調配中……</h2>
+
+            <p id="mixMessage">
+                正在融合你的魔法……
+            </p>
+
+            <div class="loading-magic">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             結果
+        ========================== -->
+        <section id="resultScreen" class="screen">
+
+            <p class="eyebrow">YOUR MAGIC POTION</p>
+
+            <h2>你的今日魔法配方</h2>
+
+            <div id="resultColor" class="result-color"></div>
+
+            <p id="colorResultText" class="color-result-text"></p>
+
+
+            <div id="fortuneCard" class="fortune-card">
+
+                <div class="card-inner">
+
+                    <div class="card-front">
+                        <span>?</span>
+                    </div>
+
+                    <div class="card-back">
+
+                        <div id="fortuneIcon" class="fortune-icon"></div>
+
+                        <h3 id="fortuneTitle"></h3>
+
+                        <p id="fortuneText"></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button id="prayBtn" class="magic-btn">
+                🕯️ 向教父禱告
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             禱告
+        ========================== -->
+        <section id="prayerScreen" class="screen">
+
+            <div class="prayer-symbol">
+                🕯️
+            </div>
+
+            <p class="eyebrow">THE GODFATHER'S CHAPEL</p>
+
+            <h2>教父祈禱室</h2>
+
+            <div class="godfather">
+
+               <div class="godfather-face">
+    <img src="godfather.png" alt="教父">
+</div>
+
+                <p>
+                    「孩子，說吧。」
+                </p>
+
+                <p>
+                    「最近有什麼事情，讓你掛心？」
+                </p>
+
+            </div>
+
+<div class="player-name-box">
+
+    <label
+        for="playerName"
+        class="player-name-label"
+    >
+        YOUR NAME
+    </label>
+
+    <input
+        id="playerName"
+        type="text"
+        maxlength="20"
+        placeholder="請輸入你的名字"
+        autocomplete="off"
+    >
+
+    <div class="player-name-hint">
+        僅限中文或英文，不含符號與表情符號
+    </div>
+
+</div>
+            <textarea
+                id="prayerInput"
+                maxlength="200"
+                placeholder="教父啊……希望我最近可以……"
+            ></textarea>
+
+            <div class="char-count">
+                <span id="charCount">0</span> / 200
+            </div>
+
+            <button id="submitPrayer" class="magic-btn">
+                🕯️ 獻上禱告
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             禱告完成
+        ========================== -->
+        <section id="prayerResultScreen" class="screen">
+
+            <!-- =========================
+     查詢教父回信
+========================== -->
+<section id="replyScreen" class="screen">
+
+    <div class="prayer-symbol">
+        🕯️
+    </div>
+
+    <p class="eyebrow">THE GODFATHER'S REPLY</p>
+
+    <h2>查看教父回信</h2>
+
+    <p class="reply-intro">
+        輸入你的祈禱編號，<br>
+        看看教父是否已經回覆。
+    </p>
+
+    <div class="code-box">
+
+        <input
+            id="prayerCodeInput"
+            type="text"
+            maxlength="8"
+            placeholder="例如 MF-7K92A"
+            autocomplete="off"
+        >
+
+        <button
+            id="checkReplyBtn"
+            class="magic-btn"
+        >
+            🕯️ 查看教父回信
+        </button>
+
+    </div>
+
+    <div
+        id="replyMessage"
+        class="reply-message"
+    ></div>
+
+    <div
+        id="godfatherReply"
+        class="godfather-reply"
+        style="display:none;"
+    >
+
+        <div class="reply-seal">
+            ✦
+        </div>
+
+        <p class="reply-label">
+            GODFATHER'S LETTER
+        </p>
+
+        <h3>
+            教父的回信
+        </h3>
+
+        <div
+            id="replyText"
+            class="reply-text"
+        ></div>
+
+    </div>
+
+   <div class="prayer-code">
+
+    <span>你的祈禱編號</span>
+
+    <strong id="prayerCode">
+        MF-XXXXX
+    </strong>
+
+    <small>
+        請記住這組編號，明天回來查看教父回信。
+    </small>
+
+</div>
+
+<button
+    id="checkReplyFromResult"
+    class="magic-btn"
+>
+    🕯️ 查看教父回信
+</button>
+
+<button
+    id="restartBtn"
+    class="magic-btn secondary-btn"
+>
+    🔮 再次調配
+</button>
+
+</section>
+
+
+    </main>
+
+
+    <footer>
+        MAGIC POTION LAB · HALLOWEEN
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

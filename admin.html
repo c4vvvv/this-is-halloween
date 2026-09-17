@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>教父祕密檔案室</title>
+
+<script src="config.js?v=20260917"></script>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        "Noto Serif TC",
+        "PingFang TC",
+        "Microsoft JhengHei",
+        serif;
+
+    color: #eee7dc;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(99, 71, 113, .25),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(133, 93, 38, .10),
+            transparent 30%
+        ),
+        #0b0910;
+
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.5) 0 1px,
+            transparent 1.5px
+        );
+
+    background-size: 95px 95px;
+    opacity: .08;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    left: 50%;
+    top: -250px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(196, 145, 67, .10),
+            transparent 65%
+        );
+
+    filter: blur(15px);
+
+    pointer-events: none;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    width: min(1380px, calc(100% - 40px));
+    margin: auto;
+    padding: 45px 0 80px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    border-bottom:
+        1px solid rgba(190, 151, 86, .25);
+
+    padding-bottom: 25px;
+}
+
+.brand {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.candle {
+    width: 52px;
+    height: 64px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 28px;
+
+    border:
+        1px solid rgba(197, 158, 89, .35);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(103,75,117,.25),
+            rgba(20,17,25,.8)
+        );
+
+    box-shadow:
+        0 0 35px rgba(190, 145, 61, .08);
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+
+    color: #b99a65;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+h1 {
+    margin: 0;
+
+    font-size: clamp(28px, 4vw, 44px);
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    color: #f0e6d6;
+}
+
+.subtitle {
+    margin: 8px 0 0;
+
+    color: #918a96;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+.login-status {
+    color: #807987;
+    font-size: 12px;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-box {
+    max-width: 520px;
+
+    margin: 80px auto;
+
+    padding: 42px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29,23,35,.94),
+            rgba(14,12,19,.97)
+        );
+
+    border:
+        1px solid rgba(192, 150, 79, .25);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.45);
+
+    border-radius: 4px;
+}
+
+.login-symbol {
+    font-size: 42px;
+
+    margin-bottom: 20px;
+}
+
+.login-box h2 {
+    margin: 0 0 10px;
+
+    font-weight: 500;
+}
+
+.login-box p {
+    color: #89818e;
+    font-size: 13px;
+}
+
+.input {
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 18px;
+
+    padding: 0 15px;
+
+    color: #eee;
+
+    background: #0b0910;
+
+    border:
+        1px solid rgba(192,150,79,.25);
+
+    outline: none;
+
+    border-radius: 3px;
+
+    font-family: inherit;
+}
+
+.input:focus {
+    border-color: #b9975b;
+
+    box-shadow:
+        0 0 0 3px rgba(185,151,91,.08);
+}
+
+.magic-btn {
+    width: 100%;
+
+    min-height: 46px;
+
+    margin-top: 14px;
+
+    border: 1px solid #a98247;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d6b38,
+            #b08b4c
+        );
+
+    color: #171217;
+
+    font-family: inherit;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    border-radius: 3px;
+
+    transition: .2s;
+}
+
+.magic-btn:hover {
+    filter: brightness(1.12);
+
+    transform: translateY(-1px);
+}
+
+.message {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    color: #c99393;
+
+    font-size: 13px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+#adminPanel {
+    display: none;
+}
+
+.dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 28px;
+}
+
+.stat {
+    position: relative;
+
+    padding: 20px 22px;
+
+    min-height: 105px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,25,37,.9),
+            rgba(17,14,22,.95)
+        );
+
+    border:
+        1px solid rgba(192,150,79,.17);
+
+    border-radius: 3px;
+
+    overflow: hidden;
+}
+
+.stat::after {
+    content: "✦";
+
+    position: absolute;
+
+    right: 16px;
+    top: 12px;
+
+    color: rgba(194,151,78,.25);
+
+    font-size: 20px;
+}
+
+.stat-label {
+    color: #817b87;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+.stat-number {
+    margin-top: 7px;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 30px;
+
+    color: #dbc18f;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.toolbar-left {
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 9px 15px;
+
+    color: #9b94a0;
+
+    background: transparent;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    border-radius: 3px;
+}
+
+.filter-btn.active {
+    color: #dfc58e;
+
+    border-color:
+        rgba(190,150,79,.45);
+
+    background:
+        rgba(190,150,79,.08);
+}
+
+.search {
+    width: 230px;
+
+    height: 38px;
+
+    padding: 0 12px;
+
+    background: #0e0c13;
+
+    color: #eee;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    outline: none;
+
+    font-family: inherit;
+}
+
+.search:focus {
+    border-color: #94713e;
+}
+
+.refresh-btn {
+    height: 38px;
+
+    padding: 0 15px;
+
+    color: #b8a77d;
+
+    background: transparent;
+
+    border:
+        1px solid rgba(190,150,79,.22);
+
+    cursor: pointer;
+
+    font-family: inherit;
+}
+
+/* =========================
+   PRAYER GRID
+========================= */
+
+.prayer-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+/* =========================
+   PRAYER CARD
+========================= */
+
+.prayer-card {
+    position: relative;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(31,25,38,.98),
+            rgba(17,14,22,.98)
+        );
+
+    border:
+        1px solid rgba(192,150,79,.18);
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.18);
+
+    transition:
+        border .2s,
+        transform .2s;
+}
+
+.prayer-card:hover {
+    border-color:
+        rgba(192,150,79,.4);
+
+    transform: translateY(-2px);
+}
+
+.prayer-card.replied {
+    border-color:
+        rgba(101,150,117,.22);
+}
+
+/* corner */
+
+.prayer-card::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    color:
+        rgba(195,153,80,.35);
+}
+
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 16px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+}
+
+.code {
+    color: #dfc48c;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 19px;
+
+    letter-spacing: 2px;
+}
+
+.date {
+    color: #716a76;
+
+    font-size: 11px;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badges {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 15px;
+
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 5px 9px;
+
+    font-size: 11px;
+
+    border-radius: 2px;
+
+    background: rgba(255,255,255,.04);
+
+    color: #aaa2ad;
+}
+
+.badge.fortune {
+    color: #d2b67a;
+
+    border:
+        1px solid rgba(192,150,79,.2);
+}
+
+.badge.pending {
+    color: #c8a95e;
+
+    background:
+        rgba(176,134,49,.08);
+}
+
+.badge.replied {
+    color: #8bb596;
+
+    background:
+        rgba(76,132,91,.08);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.section-title {
+    margin: 22px 0 9px;
+
+    color: #77717d;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+.prayer-text {
+    min-height: 65px;
+
+    padding: 15px;
+
+    color: #ddd5ca;
+
+    background:
+        rgba(0,0,0,.17);
+
+    border-left:
+        2px solid rgba(184,143,72,.45);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+/* =========================
+   REPLY AREA
+========================= */
+
+.reply-area {
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+}
+
+.reply-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 8px;
+}
+
+.reply-title span:first-child {
+    color: #b89a62;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+.reply-title span:last-child {
+    color: #625c68;
+
+    font-size: 10px;
+}
+
+.reply-box {
+    width: 100%;
+
+    min-height: 125px;
+
+    resize: vertical;
+
+    padding: 13px;
+
+    background:
+        #0c0a10;
+
+    color: #e4ddd3;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    outline: none;
+
+    font-family: inherit;
+
+    line-height: 1.7;
+
+    font-size: 13px;
+
+    border-radius: 2px;
+}
+
+.reply-box:focus {
+    border-color:
+        rgba(185,148,85,.55);
+
+    box-shadow:
+        0 0 0 3px rgba(185,148,85,.05);
+}
+
+.send-btn {
+    width: 100%;
+
+    height: 43px;
+
+    margin-top: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #77572f,
+            #a47d42
+        );
+
+    border: 0;
+
+    color: #f4eadb;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    letter-spacing: 1px;
+
+    transition: .2s;
+}
+
+.send-btn:hover {
+    filter: brightness(1.15);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+    grid-column: 1 / -1;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    border:
+        1px dashed rgba(190,150,79,.16);
+
+    color: #716a77;
+}
+
+.empty-symbol {
+    font-size: 35px;
+
+    margin-bottom: 15px;
+
+    opacity: .6;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+    grid-column: 1 / -1;
+
+    padding: 70px;
+
+    text-align: center;
+
+    color: #837b88;
+}
+
+.loading::after {
+    content: " ✦";
+
+    animation:
+        sparkle 1.2s infinite;
+}
+
+@keyframes sparkle {
+
+    0%, 100% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .dashboard {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .prayer-list {
+        grid-template-columns:
+            1fr;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .app {
+        width: calc(100% - 24px);
+
+        padding-top: 25px;
+    }
+
+    .header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .candle {
+        width: 45px;
+        height: 52px;
+
+        font-size: 22px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .toolbar {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .toolbar-left {
+        width: 100%;
+    }
+
+    .filter-btn {
+        flex: 1;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .refresh-btn {
+        width: 100%;
+    }
+
+    .prayer-card {
+        padding: 19px;
+    }
+
+    .card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 6px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="app">
+
+    <!-- =====================
+         LOGIN
+    ====================== -->
+
+    <section
+        id="loginBox"
+        class="login-box"
+    >
+
+        <div class="login-symbol">
+            🕯️
+        </div>
+
+        <p class="eyebrow">
+            THE GODFATHER'S ARCHIVE
+        </p>
+
+        <h2>
+            教父祕密檔案室
+        </h2>
+
+        <p>
+            只有被允許的人，
+            才能閱讀這些祕密禱告。
+        </p>
+
+        <input
+            id="adminKey"
+            class="input"
+            type="password"
+            placeholder="輸入教父後台金鑰"
+        >
+
+        <button
+            id="loginBtn"
+            class="magic-btn"
+        >
+            開啟祕密檔案室
+        </button>
+
+        <div
+            id="loginMessage"
+            class="message"
+        ></div>
+
+    </section>
+
+
+    <!-- =====================
+         ADMIN
+    ====================== -->
+
+    <section
+        id="adminPanel"
+    >
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="candle">
+                    🕯️
+                </div>
+
+                <div>
+
+                    <p class="eyebrow">
+                        GODFATHER'S ARCHIVE
+                    </p>
+
+                    <h1>
+                        教父祕密檔案室
+                    </h1>
+
+                    <p class="subtitle">
+                        每一份禱告，都等待著一封回信。
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="login-status">
+                ARCHIVE ACCESS GRANTED ✦
+            </div>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+
+        <section class="dashboard">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    今日收到禱告
+                </div>
+
+                <div
+                    id="todayCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    等待教父回覆
+                </div>
+
+                <div
+                    id="pendingCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    已完成回信
+                </div>
+
+                <div
+                    id="repliedCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    全部祕密檔案
+                </div>
+
+                <div
+                    id="totalCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TOOLBAR -->
+
+        <section class="toolbar">
+
+            <div class="toolbar-left">
+
+                <button
+                    class="filter-btn active"
+                    data-status="pending"
+                >
+                    🕯️ 待回覆
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-status="replied"
+                >
+                    ✦ 已回覆
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-status="all"
+                >
+                    📜 全部
+                </button>
+
+            </div>
+
+
+            <input
+                id="searchInput"
+                class="search"
+                type="search"
+                placeholder="搜尋禱告編號 MF-XXXXX"
+            >
+
+
+            <button
+                id="refreshBtn"
+                class="refresh-btn"
+            >
+                ↻ 更新檔案
+            </button>
+
+        </section>
+
+
+        <!-- PRAYER LIST -->
+
+        <section
+            id="prayerList"
+            class="prayer-list"
+        ></section>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =========================
+   CONFIG
+========================= */
+
+const API = window.MAGIC_CONFIG.API_URL;
+
+console.log("教父後台 API：", API);
+
+let adminKey = "";
+
+let currentStatus = "pending";
+
+let allRows = [];
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+    .getElementById("loginBtn")
+    .addEventListener(
+        "click",
+        login
+    );
+
+
+document
+    .getElementById("adminKey")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+                login();
+            }
+
+        }
+    );
+
+
+async function login() {
+
+    const input =
+        document.getElementById(
+            "adminKey"
+        );
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+    adminKey =
+        input.value.trim();
+
+    if (!adminKey) {
+
+        message.textContent =
+            "請輸入教父後台金鑰。";
+
+        return;
+    }
+
+
+    message.textContent =
+        "正在確認教父身分……";
+
+
+    try {
+
+        const url =
+            API +
+            "?action=checkAdmin" +
+            "&adminKey=" +
+            encodeURIComponent(
+                adminKey
+            );
+
+
+        const response =
+            await fetch(url);
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.ok) {
+
+            message.textContent =
+                "🕯️ " +
+                data.message;
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "";
+
+
+        document
+            .getElementById(
+                "loginBox"
+            )
+            .style.display =
+                "none";
+
+
+        document
+            .getElementById(
+                "adminPanel"
+            )
+            .style.display =
+                "block";
+
+
+        await loadPrayers();
+
+
+    } catch (error) {
+
+        message.textContent =
+            "無法連接教父檔案室：" +
+            error.message;
+
+    }
+
+}
+
+/* =========================
+   FETCH
+========================= */
+
+async function fetchPrayers(
+    status
+) {
+
+    const url =
+        API +
+        "?action=listPrayers" +
+        "&adminKey=" +
+        encodeURIComponent(
+            adminKey
+        ) +
+        "&status=" +
+        status;
+
+
+    const response =
+        await fetch(url);
+
+
+    const data =
+        await response.json();
+
+
+    if (!data.ok) {
+
+        throw new Error(
+            data.message ||
+            "無法取得檔案。"
+        );
+
+    }
+
+
+    return data.rows || [];
+
+}
+
+
+/* =========================
+   LOAD
+========================= */
+
+async function loadPrayers() {
+
+    const container =
+        document.getElementById(
+            "prayerList"
+        );
+
+    container.innerHTML = `
+        <div class="loading">
+            正在翻閱祕密檔案……
+        </div>
+    `;
+
+
+    try {
+
+        const rows =
+            await fetchPrayers(
+                "all"
+            );
+
+        allRows = rows;
+
+        updateDashboard(
+            rows
+        );
+
+        renderCurrentFilter();
+
+    } catch (error) {
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-symbol">
+                    🕯️
+                </div>
+
+                ${escapeHTML(
+                    error.message
+                )}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function updateDashboard(
+    rows
+) {
+
+    const today =
+        new Date();
+
+    const todayString =
+        today.toDateString();
+
+
+    const todayRows =
+        rows.filter(
+            row => {
+
+                if (!row.created_at) {
+                    return false;
+                }
+
+                return new Date(
+                    row.created_at
+                ).toDateString()
+                    === todayString;
+
+            }
+        );
+
+
+    const pending =
+        rows.filter(
+            row =>
+                row.status !==
+                "replied"
+        );
+
+
+    const replied =
+        rows.filter(
+            row =>
+                row.status ===
+                "replied"
+        );
+
+
+    document
+        .getElementById(
+            "todayCount"
+        )
+        .textContent =
+            todayRows.length;
+
+
+    document
+        .getElementById(
+            "pendingCount"
+        )
+        .textContent =
+            pending.length;
+
+
+    document
+        .getElementById(
+            "repliedCount"
+        )
+        .textContent =
+            replied.length;
+
+
+    document
+        .getElementById(
+            "totalCount"
+        )
+        .textContent =
+            rows.length;
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+document
+    .querySelectorAll(
+        ".filter-btn"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            ".filter-btn"
+                        )
+                        .forEach(
+                            btn =>
+                                btn.classList
+                                    .remove(
+                                        "active"
+                                    )
+                        );
+
+                    button.classList
+                        .add("active");
+
+
+                    currentStatus =
+                        button.dataset
+                            .status;
+
+
+                    renderCurrentFilter();
+
+                }
+            );
+
+        }
+    );
+
+
+function renderCurrentFilter() {
+
+    let rows =
+        [...allRows];
+
+
+    if (
+        currentStatus !==
+        "all"
+    ) {
+
+        rows =
+            rows.filter(
+                row =>
+                    currentStatus ===
+                    "pending"
+                        ? row.status !==
+                          "replied"
+                        : row.status ===
+                          "replied"
+            );
+
+    }
+
+
+    renderPrayers(rows);
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document
+    .getElementById(
+        "searchInput"
+    )
+    .addEventListener(
+        "input",
+        event => {
+
+            const keyword =
+                event.target.value
+                    .trim()
+                    .toUpperCase();
+
+
+            if (!keyword) {
+
+                renderCurrentFilter();
+
+                return;
+
+            }
+
+
+            const rows =
+                allRows.filter(
+                    row =>
+                        String(
+                            row.code || ""
+                        )
+                        .toUpperCase()
+                        .includes(
+                            keyword
+                        )
+                );
+
+
+            renderPrayers(rows);
+
+        }
+    );
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderPrayers(
+    rows
+) {
+
+    const container =
+        document.getElementById(
+            "prayerList"
+        );
+
+
+    if (!rows.length) {
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <div class="empty-symbol">
+                    🕯️
+                </div>
+
+                目前沒有找到任何祕密禱告。
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    rows =
+        [...rows].reverse();
+
+
+    container.innerHTML =
+        rows
+            .map(
+                prayer =>
+                    createPrayerCard(
+                        prayer
+                    )
+            )
+            .join("");
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+function createPrayerCard(
+    prayer
+) {
+
+    const replied =
+        prayer.status ===
+        "replied";
+
+
+    return `
+
+        <article
+            class="
+                prayer-card
+                ${replied
+                    ? "replied"
+                    : ""}
+            "
+        >
+
+            <div
+                class="card-header"
+            >
+
+                <div class="code">
+                    ${escapeHTML(
+                        prayer.code
+                    )}
+                </div>
+
+                <div class="date">
+                    ${formatDate(
+                        prayer.created_at
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="badges">
+
+                <span
+                    class="
+                        badge
+                        fortune
+                    "
+                >
+                    ${escapeHTML(
+                        prayer.fortune ||
+                        "未知"
+                    )}
+                </span>
+
+
+                <span
+                    class="
+                        badge
+                        ${
+                            replied
+                                ? "replied"
+                                : "pending"
+                        }
+                    "
+                >
+                    ${
+                        replied
+                            ? "✦ 已回覆"
+                            : "🕯️ 待回覆"
+                    }
+                </span>
+
+
+                ${
+                    prayer.mixed_color
+                        ? `
+                        <span
+                            class="badge"
+                        >
+                            ${escapeHTML(
+                                prayer.mixed_color
+                            )}
+                        </span>
+                        `
+                        : ""
+                }
+
+            </div>
+
+
+            <div
+                class="section-title"
+            >
+                PLAYER'S PRAYER
+            </div>
+
+
+            <div
+                class="prayer-text"
+            >
+                ${escapeHTML(
+                    prayer.prayer
+                )}
+            </div>
+
+
+            <div
+                class="reply-area"
+            >
+
+                <div
+                    class="reply-title"
+                >
+
+                    <span>
+                        ✦ 教父的回信
+                    </span>
+
+                    <span>
+                        GODFATHER'S REPLY
+                    </span>
+
+                </div>
+
+
+                <textarea
+                    id="reply-${escapeHTML(
+                        prayer.id
+                    )}"
+                    class="reply-box"
+                    placeholder="寫下教父想對這名孩子說的話……"
+                >${escapeHTML(
+                    prayer.reply || ""
+                )}</textarea>
+
+
+                <button
+                    class="send-btn"
+                    onclick="
+                        replyPrayer(
+                            '${escapeJS(
+                                prayer.id
+                            )}'
+                        )
+                    "
+                >
+                    ${
+                        replied
+                            ? "✦ 更新教父回信"
+                            : "🕯️ 封印並送出回信"
+                    }
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================
+   REPLY
+========================= */
+
+async function replyPrayer(
+    id
+) {
+
+    const textarea =
+        document.getElementById(
+            `reply-${id}`
+        );
+
+
+    const reply =
+        textarea.value.trim();
+
+
+    if (!reply) {
+
+        alert(
+            "請先寫下教父的回覆。"
+        );
+
+        textarea.focus();
+
+        return;
+
+    }
+
+
+    const button =
+        textarea
+            .closest(
+                ".reply-area"
+            )
+            .querySelector(
+                ".send-btn"
+            );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "正在封印回信……";
+
+
+    try {
+
+        const response =
+            await fetch(
+                API,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "text/plain"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            action:
+                                "replyPrayer",
+
+                            adminKey:
+                                adminKey,
+
+                            id:
+                                id,
+
+                            reply:
+                                reply
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.ok) {
+
+            throw new Error(
+                data.message ||
+                "回信失敗"
+            );
+
+        }
+
+
+        await loadPrayers();
+
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "🕯️ 封印並送出回信";
+
+    }
+
+}
+
+
+/* =========================
+   REFRESH
+========================= */
+
+document
+    .getElementById(
+        "refreshBtn"
+    )
+    .addEventListener(
+        "click",
+        loadPrayers
+    );
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatDate(
+    date
+) {
+
+    if (!date) {
+        return "";
+    }
+
+
+    return new Date(date)
+        .toLocaleString(
+            "zh-TW",
+            {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }
+        );
+
+}
+
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[character])
+    );
+
+}
+
+
+function escapeJS(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /\n/g,
+        "\\n"
+    )
+    .replace(
+        /\r/g,
+        "\\r"
+    );
+
+}
+
+
+function showLoginMessage(
+    message
+) {
+
+    document
+        .getElementById(
+            "loginMessage"
+        )
+        .textContent =
+            message;
+
+}
+
+</script>
+
+</body>
+</html>

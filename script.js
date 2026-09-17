@@ -680,21 +680,34 @@ prayerInput.addEventListener(
     }
 );
 
-
 /* =========================
    提交禱告
 ========================= */
-const playerName = document.getElementById("playerName");
 
-playerName.addEventListener("input", () => {
+const playerName =
+    document.getElementById("playerName");
 
-    playerName.value =
-        playerName.value.replace(
-            /[^\u4e00-\u9fffA-Za-z]/g,
-            ""
-        );
 
-});
+/* 名字：只允許中文與英文 */
+
+if (playerName) {
+
+    playerName.addEventListener(
+        "input",
+        () => {
+
+            playerName.value =
+                playerName.value.replace(
+                    /[^\u4e00-\u9fffA-Za-z]/g,
+                    ""
+                );
+
+        }
+    );
+
+}
+
+
 submitPrayer.addEventListener(
     "click",
     async () => {
@@ -702,6 +715,34 @@ submitPrayer.addEventListener(
         const prayer =
             prayerInput.value.trim();
 
+        const name =
+            playerName
+                ? playerName.value.trim()
+                : "";
+
+
+        /* =========================
+           檢查名字
+        ========================= */
+
+        if (!name) {
+
+            alert(
+                "孩子，先告訴教父你的名字吧。"
+            );
+
+            if (playerName) {
+                playerName.focus();
+            }
+
+            return;
+
+        }
+
+
+        /* =========================
+           檢查禱告
+        ========================= */
 
         if (!prayer) {
 
@@ -720,120 +761,119 @@ submitPrayer.addEventListener(
             "🕯️ 教父正在聆聽……";
 
 
-      try {
+        try {
 
-    const name =
-    playerName.value.trim();
+            const params =
+                new URLSearchParams({
 
-if (!name) {
+                    action:
+                        "createPrayer",
 
-    alert(
-        "孩子，先告訴教父你的名字吧。"
-    );
+                    name:
+                        name,
 
-    playerName.focus();
+                    colors:
+                        selectedColors
+                            .map(
+                                item => item.name
+                            )
+                            .join(","),
 
-    return;
+                    mixedColor:
+                        finalColor,
 
-}
+                    fortune:
+                        currentFortune
+                            ? currentFortune.title
+                            : "",
 
+                    prayer:
+                        prayer
 
-cconst name =
-    playerName.value.trim();
-
-if (!name) {
-
-    alert(
-        "孩子，先告訴教父你的名字吧。"
-    );
-
-    playerName.focus();
-
-    return;
-
-}
+                });
 
 
-const params = new URLSearchParams({
+            const response =
+                await fetch(
+                    API +
+                    "?" +
+                    params.toString()
+                );
 
-    action: "createPrayer",
 
-    name: name,
+            const data =
+                await response.json();
 
-    colors: selectedColors
-        .map(item => item.name)
-        .join(","),
 
-    mixedColor: finalColor,
+            if (!data.ok) {
 
-    fortune: currentFortune
-        ? currentFortune.title
-        : "",
+                throw new Error(
+                    data.message ||
+                    "禱告送出失敗"
+                );
 
-    prayer: prayer
+            }
 
-});
 
-    const response = await fetch(
-        API + "?" + params.toString()
-    );
+            /* =========================
+               成功取得祈禱編號
+            ========================= */
 
-    const data = await response.json();
+            currentPrayerCode =
+                data.code;
 
-    if (!data.ok) {
 
-        throw new Error(
-            data.message ||
-            "禱告送出失敗"
-        );
+            localStorage.setItem(
+                "godfatherPrayer",
+                prayer
+            );
+
+
+            localStorage.setItem(
+                "godfatherPrayerCode",
+                currentPrayerCode
+            );
+
+
+            localStorage.setItem(
+                "godfatherPlayerName",
+                name
+            );
+
+
+            savedPrayer.textContent =
+                prayer;
+
+
+            prayerCode.textContent =
+                currentPrayerCode;
+
+
+            showScreen(
+                screens.prayerResult
+            );
+
+
+        } catch (error) {
+
+            alert(
+                "禱告送出失敗：\n" +
+                error.message
+            );
+
+
+        } finally {
+
+            submitPrayer.disabled =
+                false;
+
+            submitPrayer.textContent =
+                "🕯️ 獻上禱告";
+
+        }
 
     }
-
-    /* =========================
-       成功取得祈禱編號
-    ========================= */
-
-    currentPrayerCode = data.code;
-
-    localStorage.setItem(
-        "godfatherPrayer",
-        prayer
-    );
-
-    localStorage.setItem(
-        "godfatherPrayerCode",
-        currentPrayerCode
-    );
-
-    savedPrayer.textContent =
-        prayer;
-
-    prayerCode.textContent =
-        currentPrayerCode;
-
-    showScreen(
-        screens.prayerResult
-    );
-
-}
-catch (error) {
-
-    alert(
-        "禱告送出失敗：\n" +
-        error.message
-    );
-
-}
-finally {
-
-    submitPrayer.disabled = false;
-
-    submitPrayer.textContent =
-        "🕯️ 獻上禱告";
-
-}
-
-});
+);
 
 /* =========================
    從完成畫面查看回信

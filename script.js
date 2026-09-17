@@ -722,17 +722,57 @@ submitPrayer.addEventListener(
 
       try {
 
-    const params = new URLSearchParams({
-        action: "createPrayer",
-        colors: selectedColors
-            .map(item => item.name)
-            .join(","),
-        mixedColor: finalColor,
-        fortune: currentFortune
-            ? currentFortune.title
-            : "",
-        prayer: prayer
-    });
+    const name =
+    playerName.value.trim();
+
+if (!name) {
+
+    alert(
+        "孩子，先告訴教父你的名字吧。"
+    );
+
+    playerName.focus();
+
+    return;
+
+}
+
+
+cconst name =
+    playerName.value.trim();
+
+if (!name) {
+
+    alert(
+        "孩子，先告訴教父你的名字吧。"
+    );
+
+    playerName.focus();
+
+    return;
+
+}
+
+
+const params = new URLSearchParams({
+
+    action: "createPrayer",
+
+    name: name,
+
+    colors: selectedColors
+        .map(item => item.name)
+        .join(","),
+
+    mixedColor: finalColor,
+
+    fortune: currentFortune
+        ? currentFortune.title
+        : "",
+
+    prayer: prayer
+
+});
 
     const response = await fetch(
         API + "?" + params.toString()

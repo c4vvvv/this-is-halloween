@@ -1368,3 +1368,227 @@ footer {
     letter-spacing: 1px;
     text-align: left;
 }
+/* =========================
+   教父檔案室・隱藏彩蛋
+========================= */
+
+#secretArchiveTrigger {
+    cursor: default;
+    user-select: none;
+    transition: color .3s ease;
+}
+
+#secretArchiveTrigger.unlocked {
+    cursor: pointer;
+    color: #d8c08a;
+}
+
+
+/* 黑幕 */
+
+.archive-secret {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: rgba(5, 3, 8, .88);
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.archive-secret.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* 檔案卡 */
+
+.archive-secret-box {
+    width: 100%;
+    max-width: 390px;
+
+    padding: 38px 28px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #211a28,
+            #100c14
+        );
+
+    border: 1px solid rgba(216,192,138,.45);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65),
+        inset 0 0 35px rgba(216,192,138,.025);
+
+    position: relative;
+
+    transform: translateY(20px) scale(.96);
+
+    transition:
+        transform .4s ease;
+}
+
+.archive-secret.show .archive-secret-box {
+    transform: translateY(0) scale(1);
+}
+
+
+/* 四角裝飾 */
+
+.archive-secret-box::before,
+.archive-secret-box::after {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    border-color: rgba(216,192,138,.55);
+}
+
+.archive-secret-box::before {
+    top: 10px;
+    left: 10px;
+
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+
+.archive-secret-box::after {
+    right: 10px;
+    bottom: 10px;
+
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+
+/* 中間符號 */
+
+.archive-secret-symbol {
+    width: 44px;
+    height: 44px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(216,192,138,.5);
+    border-radius: 50%;
+
+    color: #d8c08a;
+    font-size: 18px;
+
+    box-shadow:
+        0 0 20px rgba(216,192,138,.08);
+}
+
+
+.archive-secret-label {
+    margin: 0 0 10px;
+
+    color: rgba(216,192,138,.55);
+
+    font-size: 9px;
+    letter-spacing: 4px;
+}
+
+
+.archive-secret-box h3 {
+    margin: 0;
+
+    color: #e8d7ad;
+
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+
+.archive-secret-box > p:not(.archive-secret-label) {
+    margin: 10px 0 28px;
+
+    color: rgba(245,238,227,.5);
+
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+
+/* 進入按鈕 */
+
+.archive-secret-btn {
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 20px;
+
+    background: rgba(216,192,138,.08);
+
+    border: 1px solid rgba(216,192,138,.45);
+
+    color: #e8d7ad;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    letter-spacing: 2px;
+
+    transition: all .25s ease;
+}
+
+.archive-secret-btn:hover {
+    background: rgba(216,192,138,.15);
+
+    border-color: #d8c08a;
+
+    box-shadow:
+        0 0 20px rgba(216,192,138,.08);
+}
+
+
+/* 關閉 */
+
+#closeArchiveSecret {
+    margin-top: 16px;
+
+    border: none;
+    background: none;
+
+    color: rgba(245,238,227,.35);
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+#closeArchiveSecret:hover {
+    color: rgba(245,238,227,.7);
+}

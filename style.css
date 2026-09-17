@@ -228,91 +228,353 @@ h2 {
     font-size: 13px;
 }
 
-
 /* =========================
-   染缸
+   魔法染缸
 ========================= */
 
 .cauldron-area {
-    margin: 50px auto 30px;
+    margin: 48px auto 30px;
+    text-align: center;
 }
 
 .cauldron {
     position: relative;
-
     width: 230px;
     height: 150px;
+    margin: 0 auto;
+    border-radius: 0 0 100px 100px;
 
-    margin: auto;
+    /* 保留原本比較自然的鍋身 */
+    background: linear-gradient(
+        180deg,
+        #39333e 0%,
+        #211d25 42%,
+        #100d13 100%
+    );
 
-    border-radius:
-        0 0 100px 100px;
-
-    background:
-        linear-gradient(
-            #302a35,
-            #100d13
-        );
-
-    border:
-        5px solid #49404d;
+    border: 5px solid #49404d;
 
     box-shadow:
-        inset 0 -20px 30px rgba(0,0,0,.8),
-        0 20px 40px rgba(0,0,0,.5);
+        inset 0 -25px 35px rgba(0, 0, 0, .85),
+        inset 0 5px 8px rgba(255,255,255,.04),
+        0 18px 35px rgba(0,0,0,.5);
 
     overflow: visible;
 }
+
+
+/* =========================
+   染缸裡的藥液
+========================= */
 
 .mixture {
     position: absolute;
 
     width: 190px;
-    height: 80px;
+    height: 68px;
 
     left: 50%;
-    top: 10px;
+    top: 8px;
 
     transform: translateX(-50%);
 
     border-radius: 50%;
 
-    background: #29232d;
+    /* 不要太亮，像真的魔法藥液 */
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            #4c8655 0%,
+            #315d3b 38%,
+            #1d3825 72%,
+            #102017 100%
+        );
+
+    border: 2px solid rgba(115, 180, 125, .32);
 
     box-shadow:
-        0 0 25px rgba(199,125,255,.4);
+        inset 0 -10px 15px rgba(0,0,0,.45),
+        0 0 18px rgba(60,160,80,.18);
+
+    overflow: visible;
 }
+
+
+/* =========================
+   藥液表面的微微波動
+========================= */
+
+.mixture::before {
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 28px;
+
+    left: 50%;
+    top: 8px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    border-top: 1px solid rgba(150,220,155,.25);
+
+    opacity: .7;
+
+    animation: liquidWave 3s ease-in-out infinite;
+}
+
+.mixture::after {
+    content: "";
+
+    position: absolute;
+
+    width: 55px;
+    height: 18px;
+
+    left: 42px;
+    top: 22px;
+
+    border-radius: 50%;
+
+    background: rgba(100,190,110,.08);
+
+    filter: blur(2px);
+
+    animation: liquidGlow 2.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   綠色泡泡
+   從藥液表面冒出來
+========================= */
 
 .smoke {
     position: absolute;
 
-    width: 25px;
-    height: 25px;
+    border-radius: 50%;
 
-    background: rgba(255,255,255,.08);
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #c9ffd0 0%,
+            #78df88 20%,
+            #3d9d50 55%,
+            #1d5228 100%
+        );
+
+    border: 1px solid rgba(190,255,195,.45);
+
+    box-shadow:
+        0 0 7px rgba(70,220,100,.45);
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+/* 左邊泡泡 */
+.smoke-1 {
+    width: 13px;
+    height: 13px;
+
+    left: 63px;
+    top: 28px;
+
+    animation:
+        bubbleLeft 2.8s ease-in-out infinite;
+}
+
+
+/* 右邊泡泡 */
+.smoke-2 {
+    width: 8px;
+    height: 8px;
+
+    left: 137px;
+    top: 25px;
+
+    animation:
+        bubbleRight 2.3s ease-in-out infinite .7s;
+}
+
+
+/* 再增加兩顆小泡泡 */
+.cauldron::before,
+.cauldron::after {
+    content: "";
+
+    position: absolute;
 
     border-radius: 50%;
 
-    animation: smoke 3s infinite;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #baffc2,
+            #62ce73 35%,
+            #28743a 70%,
+            #153c20
+        );
+
+    box-shadow:
+        0 0 6px rgba(70,220,100,.4);
+
+    z-index: 10;
+
+    pointer-events: none;
 }
 
-.smoke-1 {
-    left: 60px;
-    top: -35px;
+
+/* 小泡泡 1 */
+.cauldron::before {
+    width: 6px;
+    height: 6px;
+
+    left: 92px;
+    top: 43px;
+
+    animation:
+        bubbleSmall 2.1s ease-in-out infinite 1s;
 }
 
-.smoke-2 {
-    right: 60px;
-    top: -50px;
-    animation-delay: 1s;
+
+/* 小泡泡 2 */
+.cauldron::after {
+    width: 5px;
+    height: 5px;
+
+    left: 118px;
+    top: 35px;
+
+    animation:
+        bubbleSmall 2.6s ease-in-out infinite 1.6s;
 }
+
+
+/* =========================
+   泡泡動畫
+========================= */
+
+@keyframes bubbleLeft {
+
+    0% {
+        transform: translate(0, 3px) scale(.65);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .9;
+    }
+
+    55% {
+        transform: translate(-7px, -20px) scale(1);
+        opacity: .9;
+    }
+
+    100% {
+        transform: translate(-11px, -40px) scale(.35);
+        opacity: 0;
+    }
+}
+
+
+@keyframes bubbleRight {
+
+    0% {
+        transform: translate(0, 2px) scale(.6);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .85;
+    }
+
+    60% {
+        transform: translate(8px, -22px) scale(1);
+        opacity: .85;
+    }
+
+    100% {
+        transform: translate(13px, -42px) scale(.3);
+        opacity: 0;
+    }
+}
+
+
+@keyframes bubbleSmall {
+
+    0% {
+        transform: translateY(4px) scale(.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .8;
+    }
+
+    65% {
+        transform: translate(3px, -18px) scale(1);
+        opacity: .7;
+    }
+
+    100% {
+        transform: translate(0, -32px) scale(.2);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   藥液波動
+========================= */
+
+@keyframes liquidWave {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scaleX(.85);
+        opacity: .35;
+    }
+
+    50% {
+        transform: translateX(-50%) scaleX(1.05);
+        opacity: .7;
+    }
+}
+
+
+@keyframes liquidGlow {
+
+    0%,
+    100% {
+        opacity: .3;
+        transform: scale(.9);
+    }
+
+    50% {
+        opacity: .7;
+        transform: scale(1.05);
+    }
+}
+
+
+/* =========================
+   提示文字
+========================= */
 
 #dropText {
     margin-top: 20px;
+
     color: var(--muted);
+
+    font-size: 13px;
+    letter-spacing: 1px;
 }
-
-
 /* =========================
    調配動畫
 ========================= */
@@ -627,7 +889,280 @@ textarea:focus {
     margin-bottom: 30px;
 }
 
+.reply-intro {
+    margin: 10px auto 24px;
+    color: rgba(245, 238, 227, 0.65);
+    line-height: 1.8;
+    font-size: 14px;
+}
 
+
+/* =========================
+   祈禱編號輸入區
+========================= */
+
+.code-box {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto 22px;
+
+    padding: 22px;
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 22, 38, 0.95),
+            rgba(14, 11, 20, 0.98)
+        );
+
+    border: 1px solid rgba(216, 192, 138, 0.3);
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(216, 192, 138, 0.025);
+
+    position: relative;
+}
+
+
+/* 上方金色小裝飾 */
+
+.code-box::before {
+    content: "CONFIDENTIAL FILE";
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: rgba(216, 192, 138, 0.65);
+
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+
+/* 輸入框 */
+
+#prayerCodeInput {
+    width: 100%;
+    height: 50px;
+
+    box-sizing: border-box;
+
+    padding: 0 16px;
+
+    background: rgba(5, 5, 8, 0.8);
+
+    border: 1px solid rgba(216, 192, 138, 0.35);
+    border-radius: 6px;
+
+    color: #e8d7ad;
+
+    font-size: 18px;
+    font-family: monospace;
+    font-weight: 600;
+
+    text-align: center;
+    letter-spacing: 3px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+#prayerCodeInput::placeholder {
+    color: rgba(245, 238, 227, 0.25);
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+
+#prayerCodeInput:focus {
+    border-color: #d8c08a;
+
+    box-shadow:
+        0 0 0 2px rgba(216, 192, 138, 0.08),
+        0 0 20px rgba(216, 192, 138, 0.12);
+}
+
+
+/* 查詢按鈕 */
+
+#checkReplyBtn {
+    width: 100%;
+    margin-top: 14px;
+}
+
+
+/* =========================
+   查詢結果提示
+========================= */
+
+.reply-message {
+    width: 100%;
+    max-width: 380px;
+
+    min-height: 24px;
+
+    margin: 12px auto;
+
+    color: rgba(245, 238, 227, 0.7);
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    text-align: center;
+}
+
+
+/* =========================
+   教父回信
+========================= */
+
+.godfather-reply {
+    width: 100%;
+    max-width: 420px;
+
+    margin: 28px auto;
+
+    padding: 32px 26px;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #211a25,
+            #120f16
+        );
+
+    border: 1px solid rgba(216, 192, 138, 0.4);
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45),
+        inset 0 0 35px rgba(216, 192, 138, 0.035);
+
+    text-align: center;
+}
+
+
+/* 信件角落裝飾 */
+
+.godfather-reply::before,
+.godfather-reply::after {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    border-color: rgba(216, 192, 138, 0.55);
+}
+
+
+.godfather-reply::before {
+    top: 10px;
+    left: 10px;
+
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+
+
+.godfather-reply::after {
+    right: 10px;
+    bottom: 10px;
+
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+
+/* 印章 */
+
+.reply-seal {
+    width: 42px;
+    height: 42px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(216, 192, 138, 0.55);
+
+    border-radius: 50%;
+
+    color: #d8c08a;
+
+    font-size: 18px;
+
+    box-shadow:
+        0 0 15px rgba(216, 192, 138, 0.08);
+}
+
+
+/* GODFATHER'S LETTER */
+
+.reply-label {
+    margin: 0 0 8px;
+
+    color: rgba(216, 192, 138, 0.55);
+
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+
+.godfather-reply h3 {
+    margin: 0 0 22px;
+
+    color: #e8d7ad;
+
+    font-size: 21px;
+    font-weight: 500;
+}
+
+
+/* 回信正文 */
+
+.reply-text {
+    padding: 22px 18px;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    border-top: 1px solid rgba(216, 192, 138, 0.12);
+    border-bottom: 1px solid rgba(216, 192, 138, 0.12);
+
+    color: rgba(245, 238, 227, 0.88);
+
+    font-size: 15px;
+    line-height: 2;
+
+    text-align: left;
+
+    white-space: pre-wrap;
+}
+
+
+/* 返回按鈕 */
+
+#replyBackBtn {
+    margin-top: 12px;
+}
 /* =========================
    Footer
 ========================= */

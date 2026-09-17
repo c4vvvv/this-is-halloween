@@ -266,14 +266,63 @@
             </button>
 
         </section>
+<!-- =========================
+     禱告完成
+========================== -->
+<section id="prayerResultScreen" class="screen">
+
+    <div class="candle-animation">
+        🕯️
+    </div>
+
+    <p class="eyebrow">THE GODFATHER HAS HEARD YOU</p>
+
+    <h2>禱告已收到</h2>
+
+    <p class="prayer-confirm">
+        教父已經聽見你的心願。
+    </p>
+
+    <div class="prayer-paper">
+
+        <span>你的禱告</span>
+
+        <p id="savedPrayer"></p>
+
+    </div>
+
+    <div class="prayer-code">
+
+        <span>你的祈禱編號</span>
+
+        <strong id="prayerCode">
+            MF-XXXXX
+        </strong>
+
+        <small>
+            請記住這組編號，明天回來查看教父回信。
+        </small>
+
+    </div>
+
+    <button
+        id="checkReplyFromResult"
+        class="magic-btn"
+    >
+        🕯️ 查看教父回信
+    </button>
+
+    <button
+        id="restartBtn"
+        class="magic-btn secondary-btn"
+    >
+        🔮 再次調配
+    </button>
+
+</section>
 
 
-        <!-- =========================
-             禱告完成
-        ========================== -->
-        <section id="prayerResultScreen" class="screen">
-
-            <!-- =========================
+<!-- =========================
      查詢教父回信
 ========================== -->
 <section id="replyScreen" class="screen">
@@ -282,7 +331,9 @@
         🕯️
     </div>
 
-    <p class="eyebrow">THE GODFATHER'S REPLY</p>
+    <p class="eyebrow">
+        THE GODFATHER'S REPLY
+    </p>
 
     <h2>查看教父回信</h2>
 
@@ -340,37 +391,14 @@
 
     </div>
 
-   <div class="prayer-code">
-
-    <span>你的祈禱編號</span>
-
-    <strong id="prayerCode">
-        MF-XXXXX
-    </strong>
-
-    <small>
-        請記住這組編號，明天回來查看教父回信。
-    </small>
-
-</div>
-
-<button
-    id="checkReplyFromResult"
-    class="magic-btn"
->
-    🕯️ 查看教父回信
-</button>
-
-<button
-    id="restartBtn"
-    class="magic-btn secondary-btn"
->
-    🔮 再次調配
-</button>
+    <button
+        id="replyBackBtn"
+        class="magic-btn secondary-btn"
+    >
+        🔮 再次調配
+    </button>
 
 </section>
-
-
     </main>
 
 

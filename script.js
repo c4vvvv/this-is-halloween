@@ -1055,3 +1055,64 @@ restartBtn.addEventListener(
 
     }
 );
+/* =========================
+   教父檔案室・隱藏彩蛋
+========================= */
+
+const archiveTrigger =
+    document.getElementById("secretArchiveTrigger");
+
+const archiveSecret =
+    document.getElementById("archiveSecret");
+
+const closeArchiveSecret =
+    document.getElementById("closeArchiveSecret");
+
+let archiveClickCount = 0;
+let archiveClickTimer = null;
+
+
+/* 連點 5 次 */
+
+archiveTrigger.addEventListener("click", () => {
+
+    archiveClickCount++;
+
+    clearTimeout(archiveClickTimer);
+
+    archiveClickTimer = setTimeout(() => {
+        archiveClickCount = 0;
+    }, 1500);
+
+
+    if (archiveClickCount >= 5) {
+
+        archiveClickCount = 0;
+
+        archiveTrigger.classList.add("unlocked");
+
+        archiveSecret.classList.add("show");
+
+    }
+
+});
+
+
+/* 關閉 */
+
+closeArchiveSecret.addEventListener("click", () => {
+
+    archiveSecret.classList.remove("show");
+
+});
+
+
+/* 點黑幕也可以關閉 */
+
+archiveSecret.addEventListener("click", (event) => {
+
+    if (event.target === archiveSecret) {
+        archiveSecret.classList.remove("show");
+    }
+
+});

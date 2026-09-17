@@ -126,7 +126,30 @@ const replyBackBtn =
         "replyBackBtn"
     );
 
+const homeReplyBtn =
+    document.getElementById("homeReplyBtn");
 
+if (homeReplyBtn) {
+
+    homeReplyBtn.addEventListener(
+        "click",
+        () => {
+
+            prayerCodeInput.value = "";
+
+            replyMessage.textContent = "";
+
+            godfatherReply.style.display =
+                "none";
+
+            showScreen(
+                screens.reply
+            );
+
+        }
+    );
+
+}
 /* =========================
    切換畫面
 ========================= */
